@@ -68,7 +68,7 @@ const memes = [
     'https://media.tenor.com/G5cXavmG-fcAAAAC/programming-meme.gif'
 ];
 
-console.log('Cat Pun Name loaded')
+// console.log('Cat Pun Name loaded')
 
 // document.addEventListener("DOMContentLoaded", () => {
 function initializeCat () {
@@ -117,26 +117,33 @@ function initializeCat () {
 // })
 
 window.onload = (event) => {
-    console.log('page loaded')
+    // console.log('page loaded')
     cat = document.getElementById('cat-element');
-    initializeCat();
     // setTimeout(popUpCat, (Math.random() * 10000) );
     popUpCat();
     // document.getElementById('cat-element').style.top = '0vh';
 }
 
-window.addEventListener('click' , function(event) {
+initializeCat();
+createTextBubble();
+document.getElementById('wait-btn').addEventListener('mousedown', (e) => {
+    console.log('clicked');
     pushDownCat();
-    // popUpCat();
-    // document.getElementById('meowAudio').play();
 });
+
+// window.addEventListener('click' , function(event) {
+//     pushDownCat();
+//     // popUpCat();
+//     // document.getElementById('meowAudio').play();
+// });
 
 function popUpCat() {
     const cat = document.getElementById('cat-element');
     const oldPosition = Number(cat.style.top.replace('vh', ''));
     // console.log(`We're in popUpCat: ${oldPosition}`);
     if (oldPosition === 0) {
-        setTimeout(createTextBubble, 500);
+        // setTimeout(createTextBubble, 500);
+        document.getElementById('cat-text').style.visibility = 'visible';
         return;
     }
     cat.style.top = `${oldPosition - 0.5}vh`;
@@ -144,15 +151,16 @@ function popUpCat() {
 }
 
 function pushDownCat() {
+    console.log('called');
     const cat = document.getElementById('cat-element');
     const oldPosition = Number(cat.style.top.replace('vh', ''));
-    // console.log(`We're in popUpCat: ${oldPosition}`);
     if (oldPosition === 100 ) {
         setTimeout(popUpCat, 50);
         return;
     }
     if (oldPosition === 0) {
-        document.getElementById('cat-text').remove();
+        document.getElementById('meme-img').src = memes[Math.floor(Math.random() * memes.length)];
+        document.getElementById('cat-text').style.visibility = 'hidden';
     }
     cat.style.top = `${oldPosition + 0.4}vh`;
     setTimeout(pushDownCat, 1);
@@ -164,15 +172,18 @@ function createTextBubble() {
     txt.setAttribute('id', 'cat-text');
     txt.style.width = '55em';
     txt.style.height = '45em';
-    txt.style.margin = '0.5em';
+    // txt.style.margin = '0.5em';
+    txt.style.left = ``
     txt.style.position = 'absolute';
     txt.style.zIndex = '999';
     txt.style.backgroundColor = 'white';
     txt.style.border = '1px solid black';
     txt.style.borderRadius = '5em';
-    txt.style.overflow = 'hidden'
+    txt.style.overflow = 'hidden';
+    txt.style.visibility = 'hidden';
     
     const textImage = document.createElement('img');
+    textImage.setAttribute('id', 'meme-img');
     textImage.setAttribute('src', memes[Math.floor(Math.random() * memes.length)]);
     textImage.style.height = '100%';
     textImage.style.width = '100%';
@@ -181,17 +192,31 @@ function createTextBubble() {
 
     cat.prepend(txt);
     
-    //wait/snooze button
-    // const waitBtn = document.createElement('div');
-    // waitBtn.style.cssText = `
-    //     position: absolute;
-    //     width: 75px;
-    //     height: 50px;
-    //     z-index: 999;
-    //     background-color: white;
-    // `;
+    // wait/snooze button
+    const waitBtn = document.createElement('div');
+    waitBtn.innerText = 'Snooze';
+    waitBtn.setAttribute('id', 'wait-btn')
+    // waitBtn.addEventListener('onclick', (e) => {
+    //     console.log('clicked');
+    //     pushDownCat();
+    // });
+    waitBtn.style.cssText = `
+        position: absolute;
+        line-height: 50px;
+        text-align: center;
+        border: 1px solid black;
+        border-radius: 0.25em;
+        width: 75px;
+        height: 50px;
+        z-index: 999;
+        left: 2em;
+        bottom: 2em;
+        background-color: white;
+        user-select: none;
+        cursor: pointer;
+    `;
 
-    // txt.prepend(waitBtn);
+    txt.prepend(waitBtn);
 }
 
 // window.addEventListener('mousemove', (e) => {
