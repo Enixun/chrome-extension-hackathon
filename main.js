@@ -27,7 +27,10 @@
 
 // meow on mouse click
 /*addEventListener('click', () => {
-    const meow = document.createElement()
+    const meow = document.createElement('audio');
+    meow.setAttribute('src', ')
+    
+    
 })
 */
 // document.addEventListener('click', function handleClick(event) {
@@ -61,8 +64,9 @@ function initializeCat () {
     // catElement.style.margin = '0 auto';
     // catElement.style.margin = `0 ${(pageBody.clientWidth - catElement.clientWidth) / 2}`;
     catElement.style.margin = `0 50vw`;
-    catElement.style.opacity = '50%';
+    // catElement.style.opacity = '50%';
     catElement.style.zIndex = '999';
+    catElement.style.top = '100vh';
     catImage.style.height = '100%';
     catImage.style.width = 'auto';
     catElement.appendChild(catImage);
@@ -74,14 +78,18 @@ function initializeCat () {
 window.onload = (event) => {
     console.log('page loaded')
     initializeCat();
+    // popUpCat();
+}
+
+window.onclick = (e) => {
     popUpCat();
 }
 
 function popUpCat() {
     const cat = document.getElementById('cat-element');
-    // console.log(`We're in popUpCat: ${cat.style.top}`);
-    cat.style.top = '50px';
-    cat.style.top = '50px';
-
-    // popUpCat();
+    const oldPosition = Number(cat.style.top.replace('vh', ''));
+    // console.log(`We're in popUpCat: ${oldPosition}`);
+    if (oldPosition === 0) return;
+    cat.style.top = `${oldPosition - 0.04}vh`;
+    setTimeout(popUpCat, 1);
 }
