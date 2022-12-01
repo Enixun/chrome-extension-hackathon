@@ -44,73 +44,163 @@
 // default value is = auto
 // }
 
+const catMessages = [
+    '',
+];
+const memes = [
+    'https://media.discordapp.net/attachments/1040063913124974640/1047675210649841744/Screenshot_2022-11-30_at_6.47.07_PM.png',
+    'https://media.discordapp.net/attachments/1040063913124974640/1047558523862663309/420.jpg',
+    'https://media.discordapp.net/attachments/1044809683686404106/1045873111951753287/juicy.jpg',
+    'https://media.discordapp.net/attachments/1044809683686404106/1045860819025526814/recursion.png',
+    'https://cdn.discordapp.com/attachments/1047744135068655696/1047744655502090250/ezgif.com-gif-maker_1.gif',
+    'https://media.discordapp.net/attachments/1044809683686404106/1045765410806575265/Fevdi1669403672.jpeg',
+    'https://media.discordapp.net/attachments/1040063913124974640/1045755257310953553/image.png?width=821&height=456',
+    'https://media.discordapp.net/attachments/1040063913124974640/1045144390064148520/image.png',
+    'https://media.discordapp.net/attachments/1044809683686404106/1045123117292466187/3cwxv3fo2co51.jpg',
+    'https://media.discordapp.net/attachments/1044809683686404106/1045121417303302185/telegram-cloud-photo-size-1-5629927807333279687-y.jpg?width=821&height=735',
+    'https://media.discordapp.net/attachments/1040063913124974640/1045120671455387738/Dredd_Imposter.jpeg',
+    'https://assets-global.website-files.com/5f3c19f18169b62a0d0bf387/60d33be6ace19c29d4e0cec7_LuyYKvSMNsoK3_Kgkfbw9Cwf-vF7gFtOyUnT6TogZ8vuN81S8hQWSTUh4_TpjkdUlQjr_0cOXJL2SyPT4KjX-RAVudOV7AH4JyP3K-zzaYIVCrvIpA31aoqB7dBjwSglYaJuFR4R.png',
+    'https://pbs.twimg.com/media/EXUgmSsXQAAlWg7.jpg',
+    'https://i.ytimg.com/vi/g_Y9ZV-y3bM/maxresdefault.jpg',
+    'https://img-9gag-fun.9cache.com/photo/aVxLwmy_460s.jpg',
+    'https://www.googleapis.com/download/storage/v1/b/kaggle-forum-message-attachments/o/inbox%2F10465213%2Fdc039d8cd72d8b454e0b9a33ba7e72a5%2Fprogrammerhumor-io-frontend-memes-programming-memes-4eacde1cc669487-608x574.webp?generation=1660784184136085&alt=media',
+    'https://cdn.ebaumsworld.com/mediaFiles/picture/2502212/86588813.png',
+    'https://media.tenor.com/G5cXavmG-fcAAAAC/programming-meme.gif'
+];
+
 console.log('Cat Pun Name loaded')
 
 // document.addEventListener("DOMContentLoaded", () => {
 function initializeCat () {
     const pageBody = document.querySelector('body');
+    
     const catElement = document.createElement('div');
-    const catImage = document.createElement('img');
-    catImage.setAttribute('src', 'https://github.com/Enixun/chrome-extension-hackathon/blob/main/Cat.png?raw=true');
     catElement.setAttribute('id', 'cat-element');
     catElement.style.position = 'fixed';
     catElement.style.height = '100vh';
-    catElement.style.width = 'auto';
-    // catElement.style.display = 'block';
-    // catElement.style.margin = '0 auto';
-    // catElement.style.margin = `0 ${(pageBody.clientWidth - catElement.clientWidth) / 2}`;
-    catElement.style.margin = `0 ${Math.random() * 50}vw`;
-    // catElement.style.opacity = '50%';
+    catElement.style.width = '100vw';
     catElement.style.zIndex = '999';
     catElement.style.top = '100vh';
+    
+    const catImage = document.createElement('img');
+    catImage.setAttribute('src', 'https://github.com/Enixun/chrome-extension-hackathon/blob/main/Cat.png?raw=true');
     catImage.style.height = '100%';
     catImage.style.width = 'auto';
+    // catImage.style.margin = `0 ${Math.random() * 50}vw`;
+    catImage.style.margin = `0 30vw`;
     catElement.appendChild(catImage);
 
     pageBody.prepend(catElement);
     
-    const pawElement = document.createElement('img');
-    pawElement.setAttribute('src', '');
-    pawElement.setAttribute('id', 'paw-element');
-    catElement.appendChild(pawElement);
+    
+    // const pawElement = document.createElement('div');
+    // const pawImg = document.createElement('img');
+    // pawImg.setAttribute('src', 'https://thumbs.dreamstime.com/z/cat-paw-white-background-173592268.jpg');
+    // pawElement.setAttribute('id', 'paw-element');
+    // pawElement.style.height = '100%';
+    // pawElement.style.width = 'auto';
+    // pawElement.style.zIndex = '999';
+    // pawImg.style.height = '100%';
+    // pawImg.style.width = 'auto';
+    // pawElement.style.top = '200px';
+    // pawElement.style.position = 'fixed';
+    // // catElement.appendChild(pawElement);
+    // catElement.prepend(pawElement);
     
 
-    const meow = document.createElement('audio');
-    // meow.setAttribute('src', 'https://github.com/Enixun/chrome-extension-hackathon/blob/main/angry-2.mp3');
-    // meow.setAttribute('use');
-    meow.setAttribute('id', 'meowAudio');
-    catElement.appendChild(meow);
+    // const meow = document.createElement('audio');
+    // // meow.setAttribute('src', 'https://github.com/Enixun/chrome-extension-hackathon/blob/main/angry-2.mp3');
+    // // meow.setAttribute('use');
+    // meow.setAttribute('id', 'meowAudio');
+    // catElement.appendChild(meow);
 }
 // })
 
 window.onload = (event) => {
     console.log('page loaded')
+    cat = document.getElementById('cat-element');
     initializeCat();
-    setTimeout(popUpCat, (Math.random() * 10000) );
-    // popUpCat();
+    // setTimeout(popUpCat, (Math.random() * 10000) );
+    popUpCat();
+    // document.getElementById('cat-element').style.top = '0vh';
 }
 
-window.onclick = (e) => {
+window.addEventListener('click' , function(event) {
+    pushDownCat();
     // popUpCat();
     // document.getElementById('meowAudio').play();
-}
+});
 
 function popUpCat() {
     const cat = document.getElementById('cat-element');
     const oldPosition = Number(cat.style.top.replace('vh', ''));
     // console.log(`We're in popUpCat: ${oldPosition}`);
-    if (oldPosition === 0) return;
-    cat.style.top = `${oldPosition - 0.05}vh`;
+    if (oldPosition === 0) {
+        setTimeout(createTextBubble, 500);
+        return;
+    }
+    cat.style.top = `${oldPosition - 0.5}vh`;
     setTimeout(popUpCat, 1);
 }
 
-let circle = document.getElementById('paw');
-const onMouseMove = (e) =>{
-    circle.style.left = e.pageX + 'px';
-    circle.style.top = e.pageY + 'px';
-  }
-window.addEventListener('mousemove', (e) => {
-    const paw = document.getElementById('paw-element');
-    paw.style.left = e.pageX + 'px';
-    paw.style.right = e.pageY + 'px';
-});
+function pushDownCat() {
+    const cat = document.getElementById('cat-element');
+    const oldPosition = Number(cat.style.top.replace('vh', ''));
+    // console.log(`We're in popUpCat: ${oldPosition}`);
+    if (oldPosition === 100 ) {
+        setTimeout(popUpCat, 50);
+        return;
+    }
+    if (oldPosition === 0) {
+        document.getElementById('cat-text').remove();
+    }
+    cat.style.top = `${oldPosition + 0.4}vh`;
+    setTimeout(pushDownCat, 1);
+}
+
+function createTextBubble() {
+    const cat = document.getElementById('cat-element');
+    const txt = document.createElement('div');
+    txt.setAttribute('id', 'cat-text');
+    txt.style.width = '55em';
+    txt.style.height = '45em';
+    txt.style.margin = '0.5em';
+    txt.style.position = 'absolute';
+    txt.style.zIndex = '999';
+    txt.style.backgroundColor = 'white';
+    txt.style.border = '1px solid black';
+    txt.style.borderRadius = '5em';
+    txt.style.overflow = 'hidden'
+    
+    const textImage = document.createElement('img');
+    textImage.setAttribute('src', memes[Math.floor(Math.random() * memes.length)]);
+    textImage.style.height = '100%';
+    textImage.style.width = '100%';
+
+    txt.appendChild(textImage);
+
+    cat.prepend(txt);
+    
+    //wait/snooze button
+    // const waitBtn = document.createElement('div');
+    // waitBtn.style.cssText = `
+    //     position: absolute;
+    //     width: 75px;
+    //     height: 50px;
+    //     z-index: 999;
+    //     background-color: white;
+    // `;
+
+    // txt.prepend(waitBtn);
+}
+
+// window.addEventListener('mousemove', (e) => {
+//     const catImg = document.getElementById('cat-element');
+//     const fixedPos = Number(catImg.style.top.replace('vh', ''));
+//     const paw = document.getElementById('paw-element');
+//     if(fixedPos === 0){
+//         console.log(`e.pageX: ${e.pageX}`)
+//         paw.style.left = `${e.pageX}px`;
+//         paw.style.top = `${e.pageY}px`;
+//     }
+// });
