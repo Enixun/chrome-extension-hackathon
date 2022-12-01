@@ -1,12 +1,18 @@
 {
     "manifest_version": 2,
-    "name": "Focus",
-    "version": "1.0",
-    "description": "Blocks out the page-manager of YouTube to focus",
+    "name": "Cat Pun Name",
+    "version": "0.0",
+    "description": "Blocks out distracting sites with a more distracting cat",
     "content_scripts": [
         {
-            "matches": ["https://www.youtube.com/*"],
-            "js": ["jquery-3.1.1.min.js", "./main.js"]
+            "matches": [
+                "https://www.facebook.com/*", 
+                "https://www.youtube.com/*", 
+                "https://www.reddit.com/*",
+                "https://www.twitter.com/*",
+                "https://www.instagram.com/*"
+            ],
+            "js": ["./main.js"]
         }
     ]
 }
