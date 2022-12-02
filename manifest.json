@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Centering Attention Tool",
     "version": "1.0",
-    "description": "Distracting you from your dtractions",
+    "description": "Distracting you from your distractions",
     "content_scripts": [
         {
             "matches": [
