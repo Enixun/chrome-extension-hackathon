@@ -44,9 +44,6 @@
 // default value is = auto
 // }
 
-const catMessages = [
-    '',
-];
 const memes = [
     'https://media.discordapp.net/attachments/1040063913124974640/1047675210649841744/Screenshot_2022-11-30_at_6.47.07_PM.png',
     'https://media.discordapp.net/attachments/1040063913124974640/1047558523862663309/420.jpg',
@@ -67,6 +64,21 @@ const memes = [
     'https://cdn.ebaumsworld.com/mediaFiles/picture/2502212/86588813.png',
     'https://media.tenor.com/G5cXavmG-fcAAAAC/programming-meme.gif'
 ];
+const catVersions = [
+    'https://github.com/Enixun/chrome-extension-hackathon/blob/main/Cat.png?raw=true',
+    'https://github.com/Enixun/chrome-extension-hackathon/blob/main/Cat-Phil.png?raw=true',
+    'https://github.com/Enixun/chrome-extension-hackathon/blob/main/Cat-Will.png?raw=true'
+];
+
+const work = [
+    'https://sayingimages.com/wp-content/uploads/back-to-work-break-over-now-meme.jpg',
+    'https://uploads-ssl.webflow.com/602250ed045ee75512d753ec/616025235ceb3552b934db91_wUkImCuqVSGDuaKojulafIvbapieMCOSPI4OvaKnKDggZAbD279hyopMKLHgXxSp0F8u8rVOvFtn3_9x2sTglijjm3wXaFngDxBJuEZ0Esj-L49fr_zgOJ6gFMufY125R9OQHxMe%3Ds0.png',
+    'https://i.imgflip.com/420xaq.jpg',
+    'https://www.siliconrepublic.com/wp-content/uploads/2016/01/back-to-work-memes-arnie.jpg',
+    'https://i.pinimg.com/originals/d5/c0/86/d5c0866f5993f929a3cc3ebd52c6e51f.jpg',
+    'https://media.makeameme.org/created/get-back-to-imuq2t.jpg'
+
+]
 
 // console.log('Cat Pun Name loaded')
 
@@ -76,14 +88,23 @@ function initializeCat () {
     
     const catElement = document.createElement('div');
     catElement.setAttribute('id', 'cat-element');
+    // catElement.style.cssText = `
+    //     position: fixed;
+    //     height: 100vh;
+    //     width: 100vw;
+    //     z-index: 999;
+    //     top: 100vh;
+    // `;
     catElement.style.position = 'fixed';
     catElement.style.height = '100vh';
     catElement.style.width = '100vw';
     catElement.style.zIndex = '999';
     catElement.style.top = '100vh';
+    catElement.style.background = 'rgba(128,128,128,0.8)';
     
     const catImage = document.createElement('img');
-    catImage.setAttribute('src', 'https://github.com/Enixun/chrome-extension-hackathon/blob/main/Cat.png?raw=true');
+    catImage.setAttribute('id', 'cat-img');
+    catImage.setAttribute('src', catVersions[0]);
     catImage.style.height = '100%';
     catImage.style.width = 'auto';
     // catImage.style.margin = `0 ${Math.random() * 50}vw`;
@@ -118,7 +139,6 @@ function initializeCat () {
 
 window.onload = (event) => {
     // console.log('page loaded')
-    cat = document.getElementById('cat-element');
     // setTimeout(popUpCat, (Math.random() * 10000) );
     popUpCat();
     // document.getElementById('cat-element').style.top = '0vh';
@@ -127,8 +147,22 @@ window.onload = (event) => {
 initializeCat();
 createTextBubble();
 document.getElementById('wait-btn').addEventListener('mousedown', (e) => {
-    console.log('clicked');
     pushDownCat();
+});
+document.getElementById('meme-btn').addEventListener('mousedown', (e) => {
+    const memeBtn = document.getElementById('meme-btn');
+    let memeCount = Number(memeBtn.innerText[memeBtn.innerText.length - 1]);
+    console.log(memeCount);
+    if (memeCount > 1) {
+        document.getElementById('meme-img').src = memes[Math.floor(Math.random() * memes.length)];
+        memeBtn.innerText = `Meme: ${--memeCount}`;
+    } else {
+        memeBtn.style.display = 'none';
+        document.getElementById('meme-img').src = work[Math.floor(Math.random() * work.length)];
+        // memeBtn.disabled = true;
+    }
+
+    
 });
 
 // window.addEventListener('click' , function(event) {
@@ -140,8 +174,11 @@ document.getElementById('wait-btn').addEventListener('mousedown', (e) => {
 function popUpCat() {
     const cat = document.getElementById('cat-element');
     const oldPosition = Number(cat.style.top.replace('vh', ''));
+    document.querySelector('#meme-btn').style.display = 'inline-block';
+    document.querySelector('#meme-btn').innerText = 'Meme: 5';
     // console.log(`We're in popUpCat: ${oldPosition}`);
     if (oldPosition === 0) {
+        // console.log);
         // setTimeout(createTextBubble, 500);
         document.getElementById('cat-text').style.visibility = 'visible';
         return;
@@ -151,11 +188,11 @@ function popUpCat() {
 }
 
 function pushDownCat() {
-    console.log('called');
     const cat = document.getElementById('cat-element');
     const oldPosition = Number(cat.style.top.replace('vh', ''));
     if (oldPosition === 100 ) {
-        setTimeout(popUpCat, 50);
+        setTimeout(popUpCat, 50); //update 50 to whatever snooze length in ms
+        document.getElementById('cat-img').src = catVersions[Math.floor(Math.random() * catVersions.length)];
         return;
     }
     if (oldPosition === 0) {
@@ -170,17 +207,28 @@ function createTextBubble() {
     const cat = document.getElementById('cat-element');
     const txt = document.createElement('div');
     txt.setAttribute('id', 'cat-text');
-    txt.style.width = '55em';
-    txt.style.height = '45em';
+    txt.style.cssText = `
+        width: 55em;
+        height: 45em;
+        margin: 0.5em;
+        position: absolute;
+        z-index: 999;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 5em;
+        overflow: hidden;
+        visibility: hidden;
+    `;
+    // txt.style.width = '45%';
+    // txt.style.height = '55%';
     // txt.style.margin = '0.5em';
-    txt.style.left = ``
-    txt.style.position = 'absolute';
-    txt.style.zIndex = '999';
-    txt.style.backgroundColor = 'white';
-    txt.style.border = '1px solid black';
-    txt.style.borderRadius = '5em';
-    txt.style.overflow = 'hidden';
-    txt.style.visibility = 'hidden';
+    // txt.style.position = 'absolute';
+    // txt.style.zIndex = '999';
+    // txt.style.backgroundColor = 'white';
+    // txt.style.border = '1px solid black';
+    // txt.style.borderRadius = '5em';
+    // txt.style.overflow = 'hidden';
+    // txt.style.visibility = 'hidden';
     
     const textImage = document.createElement('img');
     textImage.setAttribute('id', 'meme-img');
@@ -192,14 +240,12 @@ function createTextBubble() {
 
     cat.prepend(txt);
     
+    // can create a function to create these buttons
+    
     // wait/snooze button
     const waitBtn = document.createElement('div');
     waitBtn.innerText = 'Snooze';
     waitBtn.setAttribute('id', 'wait-btn')
-    // waitBtn.addEventListener('onclick', (e) => {
-    //     console.log('clicked');
-    //     pushDownCat();
-    // });
     waitBtn.style.cssText = `
         position: absolute;
         line-height: 50px;
@@ -214,10 +260,33 @@ function createTextBubble() {
         background-color: white;
         user-select: none;
         cursor: pointer;
+        color: black;
     `;
 
-    txt.prepend(waitBtn);
+    const memeBtn = document.createElement('div');
+    memeBtn.innerText = 'Meme: 5';
+    memeBtn.setAttribute('id', 'meme-btn');
+    memeBtn.style.cssText = `
+        position: absolute;
+        line-height: 50px;
+        text-align: center;
+        border: 1px solid black;
+        border-radius: 0.25em;
+        width: 75px;
+        height: 50px;
+        z-index: 999;
+        left: 10em;
+        bottom: 2em;
+        background-color: white;
+        user-select: none;
+        cursor: pointer;
+        color: black;
+    `;
+
+    cat.prepend(memeBtn);
+    cat.prepend(waitBtn);
 }
+
 
 // window.addEventListener('mousemove', (e) => {
 //     const catImg = document.getElementById('cat-element');
